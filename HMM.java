@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.Math;
 
-public class MainHmm3 {
+public class HMM {
 
     public static BufferedReader br;
     public static double[][] A;
@@ -18,27 +18,6 @@ public class MainHmm3 {
     public static double logProb;
     static double[][] delta;
     static int[][] deltaIndex;
-
-    public static void main(String[] args) {
-        br = new BufferedReader(new InputStreamReader(System.in));
-        readInput();
-
-        fit();
-
-        System.out.printf("%d %d ", A.length, A[0].length);
-        for (int i = 0; i < A.length; i++) {
-            for(int j = 0; j < A[0].length; j++) {
-                System.out.printf("%f ", A[i][j]);
-            }
-        }
-        System.out.println();
-        System.out.printf("%d %d ", B.length, B[0].length);
-        for (int i = 0; i < B.length; i++){
-            for(int j = 0; j < B[0].length; j++) {
-                System.out.printf("%f ", B[i][j]);
-            }
-        }
-    }
 
     public static double fit(){
         estimateParams();
@@ -356,5 +335,18 @@ public class MainHmm3 {
             System.out.print(v[i] + " ");
         }
         System.out.println();
+    }
+
+    public static double[][] matrixMul(double[][] a, double[][] b) {
+        double[][] res = new double[a.length][b[0].length];
+        for(int i = 0; i < a.length; i++) {
+
+            for(int j = 0; j < b[0].length; j++ ) {
+                for (int k = 0; k < a[0].length; k++) {
+                    res[i][j] += a[i][k] * b[k][j];
+                }
+            }
+        }
+        return res;
     }
 }

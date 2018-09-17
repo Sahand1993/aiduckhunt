@@ -1,3 +1,5 @@
+// Run with  and java Main verbose > player2server < server2player
+
 
 class Player {
 
@@ -24,6 +26,13 @@ class Player {
          * Here you should write your clever algorithms to get the best action.
          * This skeleton never shoots.
          */
+        for(int i = 0; i < pState.getNumBirds(); i++) {
+            Bird bird = pState.getBird(i);
+            for(int j = 0; j < bird.getSeqLength(); j++) {
+                System.err.printf("%d ", bird.getObservation(j));
+            }
+            System.err.println();
+        }
 
         // This line chooses not to shoot.
         return cDontShoot;
@@ -51,8 +60,12 @@ class Player {
          */
 
         int[] lGuess = new int[pState.getNumBirds()];
-        for (int i = 0; i < pState.getNumBirds(); ++i)
+        for (int i = 0; i < pState.getNumBirds(); ++i) {
             lGuess[i] = Constants.SPECIES_UNKNOWN;
+            if(i == 0){
+                lGuess[i] = Constants.SPECIES_PIGEON;
+            }
+        }
         return lGuess;
     }
 
